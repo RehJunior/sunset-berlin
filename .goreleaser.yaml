@@ -26,10 +26,19 @@ archives:
   - id: "sunset-berlin"
     replacements:
       darwin: osx
+      linux: linux
+      windows: windows
       386: i386
+      amd64: amd64
     format_overrides:
       - goos: windows
         format: zip
+      - goos: darwin
+        format: tar.gz
+      - goos: linux
+        format: tar.gz
+    files:
+      - "{{ .Os }}-{{ .Arch }}/{{ .ProjectName }}"
 
 chocolateys:
   -
