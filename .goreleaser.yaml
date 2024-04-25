@@ -33,8 +33,6 @@ archives:
       - goos: linux
         format: tar.gz
     files:
-      - LICENSE
-      - README.md
       - "{{ .Os }}-{{ .Arch }}/{{ .ProjectName }}"
 
 
