@@ -164,12 +164,12 @@ nfpms:
     # ID of the nfpm config, must be unique.
     #
     # Default: 'default'
-    id: foo
+    id: sunset-berlin
 
     # Name of the package.
     # Default: ProjectName
     # Templates: allowed (since v1.18)
-    package_name: foo
+    package_name: sunset-berlin
 
     # You can change the file name of the package.
     #
@@ -180,8 +180,7 @@ nfpms:
     # Build IDs for the builds you want to create NFPM packages for.
     # Defaults empty, which means no filtering.
     builds:
-      - foo
-      - bar
+      - sunset-berlin
 
     # Your app's vendor.
     vendor: Drum Roll Inc.
@@ -205,6 +204,7 @@ nfpms:
       - apk
       - deb
       - rpm
+      - termux.deb # Since: v1.11
     # Umask to be used on files without explicit mode set. (overridable)
     #
     # Default: 0o002 (will remove world-writable permissions)
@@ -320,18 +320,6 @@ nfpms:
       # The src and dst attributes also supports name templates
       - src: path/{{ .Os }}-{{ .Arch }}/bar.conf
         dst: /etc/foo/bar-{{ .ProjectName }}.conf
-
-    # Additional templated contents to add to the archive.
-    # Those files will have their contents pass through the template engine,
-    # and its results will be added to the package.
-    #
-    # This feature is only available in GoReleaser Pro.
-    # Since: v1.17 (pro)
-    # Templates: allowed
-    templated_contents:
-      # a more complete example, check the globbing deep dive below
-      - src: "LICENSE.md.tpl"
-        dst: LICENSE.md
 
       # These files are not actually present in the package, but the file names
       # are added to the package header. From the RPM directives documentation:
@@ -512,14 +500,6 @@ nfpms:
       # Packages which would break if this package would be installed.
       # The installation of this package is blocked if `some-package`
       # is already installed.
-      breaks:
-        - some-package
-
-      # Packages which would break if this package would be installed.
-      # The installation of this package is blocked if `some-package`
-      # is already installed.
-      #
-      # Since: v1.25.
       breaks:
         - some-package
 
