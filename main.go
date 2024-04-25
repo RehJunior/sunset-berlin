@@ -1,14 +1,13 @@
 package main
-
+// See the sunset and current time for Berlin
 import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
 	"net/http"
 )
 
-type ResponseData struct {
+type responseData struct {
 	Timestamp string `json:"timestamp"`
 	Wheather  struct {
 		ApparentTemperatureMax      float64 `json:"apparent_temperature_max"`
@@ -26,19 +25,16 @@ func main() {
 	fmt.Printf("Jetzt ist %v \nDie Sonne geht um %v unter\n", data.Timestamp, data.Wheather.Sunset)
 }
 
-func endpoint(url string) ResponseData {
+func endpoint(url string) responseData {
 	resp, err := http.Get(url)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	defer resp.Body.Close()
 
 	body, _ := io.ReadAll(resp.Body)
 
-	var all ResponseData
-	err = json.Unmarshal(body, &all)
-	if err != nil {
-		log.Fatal(err)
-	}
+	var all responseData
+	json.Unmarshal(body, &all)
 	return all
 }
