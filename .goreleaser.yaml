@@ -221,23 +221,6 @@ nfpms:
     # Default: '/usr/bin'
     bindir: /usr/bin
 
-    # Paths to the directories where to put specific types of libraries that
-    # GoReleaser built.
-    #
-    # This should be used together with `builds.buildmode`
-    #
-    # Since: v1.24.
-    # Templates: allowed
-    libdirs:
-      # Default: '/usr/include'
-      headers: /usr/include/something
-
-      # Default: '/usr/lib'
-      cshared: /usr/lib/foo
-
-      # Default: '/usr/lib'
-      carchive: /usr/lib/foobar
-
     # Version Epoch.
     # Default: extracted from `version` if it is semver compatible
     epoch: 2
@@ -391,20 +374,6 @@ nfpms:
     #
     # Templates: allowed (since v1.20)
     scripts:
-      preinstall: "scripts/preinstall.sh"
-      postinstall: "scripts/postinstall.sh"
-      preremove: "scripts/preremove.sh"
-      postremove: "scripts/postremove.sh"
-
-    # Templated scripts to execute during the installation of the package. (overridable)
-    #
-    # Keys are the possible targets during the installation process
-    # Values are the paths to the scripts which will be executed.
-    #
-    # This feature is only available in GoReleaser Pro.
-    # Since: v1.20 (pro)
-    # Templates: allowed
-    templated_scripts:
       preinstall: "scripts/preinstall.sh"
       postinstall: "scripts/postinstall.sh"
       preremove: "scripts/preremove.sh"
