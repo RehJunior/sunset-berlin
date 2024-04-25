@@ -7,20 +7,6 @@ import (
 	"log"
 	"net/http"
 )
-
-/*
-Temperatur Var
-Print
-Endpoint Var
-dot notation
-*/
-
-/* Funktionen
-main
-endpoint
-*/
-
-
 type ResponseData struct {
 	Timestamp string `json:"timestamp"`
 	Wheather  struct {
