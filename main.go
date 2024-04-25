@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 )
+
 type ResponseData struct {
 	Timestamp string `json:"timestamp"`
 	Wheather  struct {
@@ -17,25 +18,25 @@ type ResponseData struct {
 		Temperature                 float64 `json:"temperature"`
 	} `json:"wheather"`
 }
-func main()  {
-url:= "https://bvg.fly.dev"
-data := endpoint(url)
 
+func main() {
+	url := "https://bvg.fly.dev"
+	data := endpoint(url)
 
-fmt.Printf("Jetzt ist %v \nDie Sonne geht um %v unter\n",data.Timestamp,data.Wheather.Sunset)
+	fmt.Printf("Jetzt ist %v \nDie Sonne geht um %v unter\n", data.Timestamp, data.Wheather.Sunset)
 }
 
-func endpoint(url string)ResponseData{
+func endpoint(url string) ResponseData {
 	resp, err := http.Get(url)
 	if err != nil {
 		panic(err)
 	}
 	defer resp.Body.Close()
-	
-	body , err := io.ReadAll(resp.Body)
-	
+
+	body, _ := io.ReadAll(resp.Body)
+
 	var all ResponseData
-	err = json.Unmarshal(body,&all)
+	err = json.Unmarshal(body, &all)
 	if err != nil {
 		log.Fatal(err)
 	}
