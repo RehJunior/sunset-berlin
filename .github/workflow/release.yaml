@@ -1,0 +1,52 @@
+name: release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  goreleaser:
+    runs-on: ubuntu-latest
+    steps:
+      - name: setup go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.22.x'
+
+      - name: install chocolatey
+        run: |
+          mkdir -p /opt/chocolatey
+          wget -q -O - "https://github.com/chocolatey/choco/releases/download/${CHOCOLATEY_VERSION}/chocolatey.v${CHOCOLATEY_VERSION}.tar.gz" | tar -xz -C "/opt/chocolatey"
+          echo '#!/bin/bash' >> /usr/local/bin/choco
+          echo 'mono /opt/chocolatey/choco.exe $@' >> /usr/local/bin/choco
+          chmod +x /usr/local/bin/choco
+        env:
+          CHOCOLATEY_VERSION: 1.2.0
+
+      - name: checkout custom goreleaser
+        uses: actions/checkout@v3
+        with:
+          repository: 'faabiosr/goreleaser'
+          ref: 'chocolatey'
+          path: 'goreleaser'
+
+      - name: install goreleaser
+        run: go install .
+        working-directory: goreleaser
+
+      - name: checkout the code
+        uses: actions/checkout@v3
+        with:
+          path: 'app'
+
+      - name: unshallow
+        run: git fetch --prune --unshallow
+        working-directory: app
+
+      - name: run goreleaser
+        run: goreleaser release --rm-dist
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CHOCOLATEY_API_KEY: ${{ secrets.CHOCOLATEY_API_KEY }}
+        working-directory: app
