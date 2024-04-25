@@ -24,12 +24,7 @@ builds:
 
 archives:
   - id: "sunset-berlin"
-    replacements:
-      darwin: osx
-      linux: linux
-      windows: windows
-      386: i386
-      amd64: amd64
+    name_template: '{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}_{{ .Version }}'
     format_overrides:
       - goos: windows
         format: zip
@@ -38,7 +33,10 @@ archives:
       - goos: linux
         format: tar.gz
     files:
+      - LICENSE
+      - README.md
       - "{{ .Os }}-{{ .Arch }}/{{ .ProjectName }}"
+
 
 chocolateys:
   -
