@@ -5,7 +5,7 @@ before:
     - go mod tidy
 
 builds:
-  - id: 'sunset-berlin'
+  - id: "sunset-berlin"
     main: ./
     env:
       - CGO_ENABLED=0
@@ -17,14 +17,14 @@ builds:
       - 386
       - amd64
     ldflags:
-      - '-s'
-      - '-w'
-      - '-X main.version={{ .Version }}'
-      - '-X main.osArch={{ .Os }}/{{ .Arch }}'
+      - "-s"
+      - "-w"
+      - "-X main.version={{ .Version }}"
+      - "-X main.osArch={{ .Os }}/{{ .Arch }}"
 
 archives:
   - id: "sunset-berlin"
-    name_template: '{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}_{{ .Version }}'
+    name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}_{{ .Version }}"
     format_overrides:
       - goos: windows
         format: zip
@@ -35,20 +35,18 @@ archives:
     files:
       - "{{ .Os }}-{{ .Arch }}/{{ .ProjectName }}*"
 
-
 chocolateys:
-  -
-    # Your app's package name.
+  - # Your app's package name.
     # The value may not contain spaces or character that are not valid for a URL.
     # If you want a good separator for words, use '-', not  '.'.
     #
     # Defaults to `ProjectName`.
-    name: 'sunset-berlin'
+    name: "sunset-berlin"
 
     # IDs of the archives to use.
     # Defaults to empty, which includes all artifacts.
     ids:
-      - 'sunset-berlin'
+      - "sunset-berlin"
 
     # Your app's package source url.
     # Default is empty.
@@ -79,7 +77,7 @@ chocolateys:
 
     # App's icon.
     # Default is empty.
-    icon_url: 'https://rawcdn.githack.com/RehJunior/sunset-berlin/ad7fa77314374e3537e80600e26efd745ede9864/icon.png'
+    icon_url: "https://rawcdn.githack.com/RehJunior/sunset-berlin/ad7fa77314374e3537e80600e26efd745ede9864/icon.png"
 
     # Your app's copyright details.
     # Default is empty.
@@ -111,7 +109,7 @@ chocolateys:
     tags: "sunset-berlin"
 
     # Your app's summary:
-    summary: Shows when the sun goes down in Berlin 
+    summary: Shows when the sun goes down in Berlin
 
     # This the description of your chocolatey package.
     # Supports markdown.
@@ -129,7 +127,7 @@ chocolateys:
     # The api key that should be used to push to the chocolatey repository.
     #
     # WARNING: do not expose your api key in the configuration file!
-    api_key: '{{ .Env.CHOCOLATEY_API_KEY }}'
+    api_key: "{{ .Env.CHOCOLATEY_API_KEY }}"
 
     # The source repository that will push the package to.
     #
@@ -147,15 +145,13 @@ chocolateys:
     goamd64: v1
 
 checksum:
-  name_template: 'checksums.txt'
+  name_template: "checksums.txt"
 changelog:
   sort: asc
   filters:
     exclude:
-      - '^docs:'
-      - '^test:'
-
-
+      - "^docs:"
+      - "^test:"
 
 # .goreleaser.yaml
 nfpms:
@@ -378,26 +374,6 @@ nfpms:
       postinstall: "scripts/postinstall.sh"
       preremove: "scripts/preremove.sh"
       postremove: "scripts/postremove.sh"
-
-    # All fields above marked as `overridable` can be overridden for a given
-    # package format in this section.
-    overrides:
-      # The dependencies override can for example be used to provide version
-      # constraints for dependencies where  different package formats use
-      # different versions or for dependencies that are named differently.
-      deb:
-        dependencies:
-          - baz (>= 1.2.3-0)
-          - some-lib-dev
-        # ...
-      rpm:
-        dependencies:
-          - baz >= 1.2.3-0
-          - some-lib-devel
-        # ...
-      apk:
-        # ...
-
     # Custom configuration applied only to the RPM packager.
     rpm:
       # RPM specific scripts.
@@ -432,71 +408,12 @@ nfpms:
       prefixes:
         - /usr/bin
 
-      # The package is signed if a key_file is set
-      signature:
-        # PGP secret key file path (can also be ASCII-armored).
-        #
-        # See "Signing key passphrases" below for more information.
-        #
-        # Templates: allowed
-        key_file: "{{ .Env.GPG_KEY_PATH }}"
-
     # Custom configuration applied only to the Deb packager.
     deb:
-      # Lintian overrides
-      lintian_overrides:
-        - statically-linked-binary
-        - changelog-file-missing-in-native-package
-
-      # Custom deb special files.
-      scripts:
-        # Deb rules script.
-        rules: foo.sh
-        # Deb templates file, when using debconf.
-        templates: templates
-
-      # Custom deb triggers
-      triggers:
-        # register interest on a trigger activated by another package
-        # (also available: interest_await, interest_noawait)
-        interest:
-          - some-trigger-name
-        # activate a trigger for another package
-        # (also available: activate_await, activate_noawait)
-        activate:
-          - another-trigger-name
-
-      # Packages which would break if this package would be installed.
-      # The installation of this package is blocked if `some-package`
-      # is already installed.
-      breaks:
-        - some-package
-
-      # The package is signed if a key_file is set
-      signature:
-        # PGP secret key file path (can also be ASCII-armored).
-        #
-        # See "Signing key passphrases" below for more information.
-        #
-        # Templates: allowed
-        key_file: "{{ .Env.GPG_KEY_PATH }}"
-
-        # The type describes the signers role, possible values are "origin",
-        # "maint" and "archive".
-        #
-        # Default: 'origin'
-        type: origin
-
       # Additional fields for the control file. Empty fields are ignored.
       # This will expand any env vars you set in the field values, e.g. Vcs-Browser: ${CI_PROJECT_URL}
       fields:
         Bugs: https://github.com/goreleaser/nfpm/issues
-
-      # The Debian-specific "predepends" field can be used to ensure the complete installation of a list of
-      # packages (including unpacking, pre- and post installation scripts) prior to the installation of the
-      # built package.
-      predepends:
-        - baz (>= 1.2.3-0)
 
     apk:
       # APK specific scripts.
@@ -505,35 +422,3 @@ nfpms:
         preupgrade: ./scripts/preupgrade.sh
         # The postupgrade script runs after APK.
         postupgrade: ./scripts/postupgrade.sh
-
-      # The package is signed if a key_file is set
-      signature:
-        # PGP secret key file path (can also be ASCII-armored).
-        #
-        # See "Signing key passphrases" below for more information.
-        #
-        # Templates: allowed
-        key_file: "{{ .Env.GPG_KEY_PATH }}"
-
-        # The name of the signing key. When verifying a package, the signature
-        # is matched to the public key store in /etc/apk/keys/<key_name>.rsa.pub.
-        #
-        # Default: maintainer's email address
-        # Templates: allowed (since v1.15)
-        key_name: origin
-
-    archlinux:
-      # Archlinux-specific scripts
-      scripts:
-        # The preupgrade script runs before pacman upgrades the package.
-        preupgrade: ./scripts/preupgrade.sh
-        # The postupgrade script runs after pacman upgrades the package.
-        postupgrade: ./scripts/postupgrade.sh
-
-      # The pkgbase can be used to explicitly specify the name to be used to refer
-      # to a group of packages. See: https://wiki.archlinux.org/title/PKGBUILD#pkgbase.
-      pkgbase: foo
-
-      # The packager refers to the organization packaging the software, not to be confused
-      # with the maintainer, which is the person who maintains the software.
-      packager: GoReleaser <staff@goreleaser.com>
