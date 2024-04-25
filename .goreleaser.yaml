@@ -33,7 +33,7 @@ archives:
       - goos: linux
         format: tar.gz
     files:
-      - "{{ .Os }}-{{ .Arch }}/{{ .ProjectName }}"
+      - "{{ .Os }}-{{ .Arch }}/{{ .ProjectName }}*"
 
 
 chocolateys:
