@@ -179,18 +179,17 @@ nfpms:
       - sunset-berlin
 
     # Your app's vendor.
-    vendor: Drum Roll Inc.
+    vendor: RehJunior
 
     # Your app's homepage.
-    homepage: https://example.com/
+    homepage: https://github.com/RehJunior/sunset-berlin/
 
     # Your app's maintainer (probably you).
-    maintainer: Drummer <drum-roll@example.com>
+    maintainer: RehJunior 
 
     # Your app's description.
     description: |-
-      Drum rolls installer package.
-      Software to create fast and easy drum rolls.
+     shows when the sun goes down in Berlin
 
     # Your app's license.
     license: Apache 2.0
@@ -246,25 +245,9 @@ nfpms:
     # When set to `true`, the `builds` option is ignored.
     meta: true
 
-    # Scripts to execute during the installation of the package. (overridable)
-    #
-    # Keys are the possible targets during the installation process
-    # Values are the paths to the scripts which will be executed.
-    #
-    # Templates: allowed (since v1.20)
-    scripts:
-      preinstall: "scripts/preinstall.sh"
-      postinstall: "scripts/postinstall.sh"
-      preremove: "scripts/preremove.sh"
-      postremove: "scripts/postremove.sh"
+   
     # Custom configuration applied only to the RPM packager.
     rpm:
-      # RPM specific scripts.
-      scripts:
-        # The pretrans script runs before all RPM package transactions / stages.
-        pretrans: ./scripts/pretrans.sh
-        # The posttrans script runs after all RPM package transactions / stages.
-        posttrans: ./scripts/posttrans.sh
 
       # The package summary.
       #
@@ -293,15 +276,7 @@ nfpms:
 
     # Custom configuration applied only to the Deb packager.
     deb:
-      # Additional fields for the control file. Empty fields are ignored.
-      # This will expand any env vars you set in the field values, e.g. Vcs-Browser: ${CI_PROJECT_URL}
-      fields:
-        Bugs: https://github.com/goreleaser/nfpm/issues
+ 
 
     apk:
-      # APK specific scripts.
-      scripts:
-        # The preupgrade script runs before APK upgrade.
-        preupgrade: ./scripts/preupgrade.sh
-        # The postupgrade script runs after APK.
-        postupgrade: ./scripts/postupgrade.sh
+    
