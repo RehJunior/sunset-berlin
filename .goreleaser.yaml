@@ -5,7 +5,7 @@ before:
     - go mod tidy
 
 builds:
-  - id: "sunset-berlin"
+  - id: sunset-berlin
     main: ./
     env:
       - CGO_ENABLED=0
@@ -156,21 +156,22 @@ archives:
 # .goreleaser.yaml
 
 nfpms:
-- maintainer: RehJunior
-  description: shows when the sun goes down in Berlin
-  homepage: https://github.com/RehJunior/sunset-berlin/
-  license: MIT
-  formats:
-  - deb
-  - rpm
+  - maintainer: RehJunior
+    description: shows when the sun goes down in Berlin
+    homepage: https://github.com/RehJunior/sunset-berlin/
+    license: MIT
+    formats:
+      - deb
+      - rpm
 
 # goreleaser.yaml
 
 furies:
+  - account: cyberants
     # IDs to filter by.
     # configurations get uploaded.
     ids:
-      - "sunset-berlin"
+      - sunset-berlin
 
     # Formats to upload.
     # Available options are `deb` and `rpm`.
