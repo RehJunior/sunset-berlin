@@ -25,6 +25,10 @@ jobs:
         uses: actions/setup-go@v5
         with:
           go-version: stable
+
+      - name: Ensure script permissions
+        run: chmod +x ./scripts/fury-upload.sh
+
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v5
         with:
