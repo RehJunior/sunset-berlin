@@ -2,7 +2,7 @@
 set -e
 if [ "${1: -4}" == ".deb" ] || [ "${1: -4}" == ".rpm" ]; then
 	cd dist
-	echo "uploading $1"
+	echo "uploading $1 to fury.io"
 	status="$(curl -s -q -o /dev/null -w "%{http_code}" -F package="@$1" "https://$FURY_TOKEN@push.fury.io/cyberants/")"
 	echo "got: $status"
 	if [ "$status" == "200" ] || [ "$status" == "409" ]; then
