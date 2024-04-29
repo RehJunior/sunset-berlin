@@ -185,11 +185,6 @@ furies:
     #
     # Default: 'FURY_TOKEN'
     secret_name: FURY_TOKEN
-
-    # IDs to filter by.
-    # configurations get uploaded.
-    ids:
-      - sunset-berlin
     # Formats to upload.
     # Available options are `deb` and `rpm`.
     #
