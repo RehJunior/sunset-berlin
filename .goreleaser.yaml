@@ -163,4 +163,19 @@ nfpms:
   formats:
   - deb
   - rpm
-  - apk
+
+# goreleaser.yaml
+
+furies:
+    # IDs to filter by.
+    # configurations get uploaded.
+    ids:
+      - "sunset-berlin"
+
+    # Formats to upload.
+    # Available options are `deb` and `rpm`.
+    #
+    # Default: ['deb', 'rpm']
+    formats:
+      - deb
+      - rpm
