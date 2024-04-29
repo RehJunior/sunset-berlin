@@ -164,19 +164,11 @@ nfpms:
       - deb
       - rpm
 
-# goreleaser.yaml
-
-furies:
-  - account: cyberants
-    # IDs to filter by.
-    # configurations get uploaded.
+publishers:
+  - name: fury.io
     ids:
-      - sunset-berlin
-
-    # Formats to upload.
-    # Available options are `deb` and `rpm`.
-    #
-    # Default: ['deb', 'rpm']
-    formats:
-      - deb
-      - rpm
+      - packages
+    env:
+      - "FURY_TOKEN={{ .Env.FURY_TOKEN }}"
+    cmd: ./scripts/fury-upload.sh {{ .ArtifactName }}
+    disable: "{{ if .IsNightly }}true{{ end }}"
