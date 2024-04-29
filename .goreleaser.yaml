@@ -167,7 +167,7 @@ nfpms:
 publishers:
   - name: fury.io
     ids:
-      - packages
+      - sunset-berlin
     env:
       - "FURY_TOKEN={{ .Env.FURY_TOKEN }}"
     cmd: ./scripts/fury-upload.sh {{ .ArtifactName }}
