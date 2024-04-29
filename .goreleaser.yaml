@@ -164,11 +164,36 @@ nfpms:
       - deb
       - rpm
 
-publishers:
-  - name: fury.io
+# publishers:
+#   - name: fury.io
+#     ids:
+#       - sunset-berlin
+#     env:
+#       - "FURY_TOKEN={{ .Env.FURY_TOKEN }}"
+#     cmd: ./scripts/fury-upload.sh {{ .ArtifactName }}
+#     disable: "{{ if .IsNightly }}true{{ end }}"
+
+# goreleaser.yaml
+
+furies:
+  - # fury.io account.
+    # Config is skipped if empty
+    account: cyberants
+    # Environment variable name to get the push token from.
+    # You might want to change it if you have multiple fury configurations for
+    # some reason.
+    #
+    # Default: 'FURY_TOKEN'
+    secret_name: FURY_TOKEN
+
+    # IDs to filter by.
+    # configurations get uploaded.
     ids:
       - sunset-berlin
-    env:
-      - "FURY_TOKEN={{ .Env.FURY_TOKEN }}"
-    cmd: ./scripts/fury-upload.sh {{ .ArtifactName }}
-    disable: "{{ if .IsNightly }}true{{ end }}"
+    # Formats to upload.
+    # Available options are `deb` and `rpm`.
+    #
+    # Default: ['deb', 'rpm']
+    formats:
+      - deb
+      - rpm
