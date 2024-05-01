@@ -6,6 +6,7 @@ import (
 	"io"
 	"net/http"
 	"time"
+	"github.com/fatih/color"
 )
 
 type responseData struct {
@@ -20,6 +21,7 @@ type responseData struct {
 }
 
 func main() {
+
 	url := "https://bvg.fly.dev"
 	data := endpoint(url)
 
@@ -43,20 +45,28 @@ func main() {
 	hours := duration / time.Hour
 	minutes := (duration % time.Hour) / time.Minute
 
-	fmt.Printf("Jetzt ist %v \nDie Sonne geht um %v unter\n", data.Timestamp, data.Wheather.Sunset)
-	fmt.Printf("Verbleibende Sonnenstunden: %d Stunden und %d Minuten\n", hours, minutes)
+	color.Cyan("Jetzt ist %s\n", data.Timestamp)
+    color.Red("Die Sonne geht um %s unter\n", data.Wheather.Sunset)
+    color.Green("Verbleibende Sonnenstunden: %d Stunden und %d Minuten\n", hours, minutes)
+
 }
 
 func endpoint(url string) responseData {
-	resp, err := http.Get(url)
-	if err != nil {
-		fmt.Println(err)
-	}
-	defer resp.Body.Close()
+    resp, err := http.Get(url)
+    if err != nil {
+        fmt.Println("Failed to fetch data:", err)
+        return responseData{}
+    }
+    defer resp.Body.Close()
 
-	body, _ := io.ReadAll(resp.Body)
+    body, err := io.ReadAll(resp.Body)
+    if err != nil {
+        fmt.Println("Failed to read response body:", err)
+        return responseData{}
+    }
 
-	var all responseData
-	json.Unmarshal(body, &all)
-	return all
+    var all responseData
+    json.Unmarshal(body, &all)
+    return all
 }
+
