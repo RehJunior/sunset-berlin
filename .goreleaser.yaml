@@ -66,6 +66,30 @@ furies:
       - rpm
 
 
+scoops:
+  - name: sunset-berlin
+    url_template: "https://github.com/RehJunior/sunset-berlin/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+    homepage: "https://github.com/RehJunior/sunset-berlin/"
+    description: "Shows when the sun goes down in Berlin"
+    license: MIT
+    commit_author:
+      name: github-actions
+      email: actions@github.com
+    commit_msg_template: "Scoop manifest update for {{ .ProjectName }} version {{ .Tag }}"
+    persist:
+      - "data"
+      - "config.toml"
+    pre_install: ["Write-Host 'Preparing to install...'"]
+    post_install: ["Write-Host 'Installation complete.'"]
+    depends:
+      - "git"
+    repository:
+      owner: RehJunior
+      name: sunset-berlin-scoop
+      branch: main
+      token: "{{ .Env.GITHUB_TOKEN }}"
+
+
 # chocolateys:
 #   - name: "sunset-berlin"
 #     ids:
