@@ -85,7 +85,7 @@ scoops:
       - "git"
     repository:
       owner: RehJunior
-      name: sunset-berlin-scoop
+      name: sunset-berlin
       branch: main
       token: "{{ .Env.GITHUB_TOKEN }}"
 
