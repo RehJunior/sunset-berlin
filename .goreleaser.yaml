@@ -89,25 +89,3 @@ scoops:
       branch: main
       token: "{{ .Env.GITHUB_TOKEN }}"
 
-
-# chocolateys:
-#   - name: "sunset-berlin"
-#     ids:
-#       - sunset-berlin
-#     owners: RehJunior
-#     authors: RehJunior
-#     project_url: https://github.com/RehJunior/sunset-berlin/
-#     url_template: "https://github.com/RehJunior/sunset-berlin/releases/download/v{{ .Version }}/{{ .ArtifactName }}"
-#     icon_url: "https://openmoji.org/php/download_asset.php?type=emoji&emoji_hexcode=1F307&emoji_variant=color"
-#     copyright: Copyright © RehJunior, 2022
-#     license_url: https://github.com/RehJunior/sunset-berlin/blob/main/LICENSE
-#     project_source_url: https://github.com/RehJunior/sunset-berlin
-#     docs_url: https://github.com/RehJunior/sunset-berlin/blob/main/README.md
-#     bug_tracker_url: https://github.com/RehJunior/sunset-berlin/issues
-#     tags: "sunset-berlin"
-#     summary: Shows when the sun goes down in Berlin
-#     description: |
-#       {{ .ProjectName }} shows when the sun goes down in Berlin every time that you run.
-#     release_notes: "https://github.com/RehJunior/sunset-berlin/releases/tag/v{{ .Version }}"
-#     api_key: '{{ .Env.CHOCOLATEY_API_KEY }}'
-      
