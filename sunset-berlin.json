@@ -1,0 +1,35 @@
+{
+    "version": "1.1.3",
+    "architecture": {
+        "64bit": {
+            "url": "https://github.com/RehJunior/sunset-berlin/releases/download/v1.1.3/sunset-berlin_windows_amd64_1.1.3.zip",
+            "bin": [
+                "sunset-berlin.exe"
+            ],
+            "hash": "9f2f611b456a2ccde3d8eab7dfd0921e4903dcfd232d9ab0e8b14a11495a5fe6"
+        },
+        "arm64": {
+            "url": "https://github.com/RehJunior/sunset-berlin/releases/download/v1.1.3/sunset-berlin_windows_arm64_1.1.3.zip",
+            "bin": [
+                "sunset-berlin.exe"
+            ],
+            "hash": "03b01b3cda7aba120f2ba77181e3677d9fb1beffd350713130ca7dfb4d7cac07"
+        }
+    },
+    "homepage": "https://github.com/RehJunior/sunset-berlin/",
+    "license": "MIT",
+    "description": "Shows when the sun goes down in Berlin",
+    "persist": [
+        "data",
+        "config.toml"
+    ],
+    "pre_install": [
+        "Write-Host 'Preparing to install...'"
+    ],
+    "post_install": [
+        "Write-Host 'Installation complete.'"
+    ],
+    "depends": [
+        "git"
+    ]
+}
